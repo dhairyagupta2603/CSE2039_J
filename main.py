@@ -6,7 +6,10 @@ FPS = 30
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Kingdom of Circles')
 
+# board initialization
 board = Board()
+board.draw_squares(WIN)
+pygame.display.update()
 
 def main():
     run = True
@@ -18,9 +21,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-
-        board.draw_squares(WIN)
-        pygame.display.update()
+        
         
     pygame.quit()
 

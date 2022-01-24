@@ -1,13 +1,15 @@
 import pygame
-from .constants import DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE
-
+from .constants import DARKER_GREEN, GREEN, GREY, HEIGHT, ROWS, COLS, SQUARE_SIZE, WIDTH
+from .enemies import Enemy
+from .player import Player
 
 class Board:
     def __init__(self) -> None:
-        self.board = []
+        self.board_values = [([0]*COLS) for _ in range(ROWS)]
+        self.outer_values = [0 for _ in range(2*(HEIGHT - 2) + 2(WIDTH - 4))]
         self.num_enemies = 1
 
-    def draw_squares(self, win):
+    def draw_squares(self, win) -> None:
         win.fill(GREEN)
         for row in range(ROWS):
             for col in range(COLS):
@@ -18,5 +20,12 @@ class Board:
                     pygame.draw.rect(
                         win, GREY, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
-    def create_board(self):
-        pass
+    def _add_enemy(self) -> None:
+        self.num_enemies += 1
+        # TODO: a function to get position of new enemy
+
+    def create_board(self) -> None:
+        for row in range(ROWS):
+            self.board.append([])
+            for col in range(COLS):
+                pass

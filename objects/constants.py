@@ -1,6 +1,6 @@
 # display window
-HEIGHT, WIDTH = 650, 650
-ROWS, COLS = 13, 13
+HEIGHT, WIDTH = 700, 700
+ROWS, COLS = 14, 14
 SQUARE_SIZE = WIDTH // COLS
 
 # rgb
