@@ -14,22 +14,22 @@ pygame.display.update()
 player = Player(1, 1)
 board.get_board_matrix(player.get_pos())
 enemy = Enemy(4, 8)
-player.draw(WIN)
-enemy.draw(WIN)
+player._draw(WIN)
+enemy._draw(WIN)
 pygame.display.update()
+
 
 def main():
     run = True
     Clock = pygame.time.Clock()
-    
+
     while run:
         Clock.tick(FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        
-        
+
     pygame.quit()
 
 

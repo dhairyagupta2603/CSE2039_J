@@ -18,7 +18,7 @@ DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
 
 # piece objects
-PLAYER = 'player'
+PLAYER = {'name': 'Player', 'seek': [-1, 0, 1]}
 ENEMY_4_DIR = {'name': 'Weak Enemy', 'seek': [-1, 1]}
 ENEMY_8_DIR = {'name': 'Strong Enemy', 'seek': [-1, 0, 1]}
 
