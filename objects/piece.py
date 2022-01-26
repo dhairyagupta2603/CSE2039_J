@@ -18,6 +18,9 @@ class Piece:
         self.x = SQUARE_SIZE * self.col + SQUARE_SIZE // 2
         self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
 
+    def get_pos(self)->tuple:
+        return (self.row, self.col)
+
     def draw(self, win) -> None:
         radius = SQUARE_SIZE // 2 - self.PADDING
         pygame.draw.circle(win, BLACK, (self.x, self.y), radius + self.OUTLINE)

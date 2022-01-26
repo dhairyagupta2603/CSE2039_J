@@ -16,3 +16,6 @@ BLUE = (0, 0, 255)
 PLAYER = 'player'
 ENEMY_4_DIR = 'weak_enemy'
 ENEMY_8_DIR = 'strong_enemy'
+
+# player movement
+PLAYER_SQUARE_VALUE = max(ROWS, COLS)
