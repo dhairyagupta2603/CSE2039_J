@@ -1,12 +1,10 @@
 import pygame
-from objects.constants import HEIGHT, WIDTH
+from objects.constants import WIN, FPS
 from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 
 
-FPS = 30
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Kingdom of Circles')
 
 # board initialization

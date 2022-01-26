@@ -1,7 +1,12 @@
+import pygame
+
+
 # display window
 HEIGHT, WIDTH = 700, 700
 ROWS, COLS = 14, 14
 SQUARE_SIZE = WIDTH // COLS
+FPS = 30
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # rgb
 GREY = (127, 127, 127)
@@ -12,10 +17,10 @@ GREEN = (0, 255, 0)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
 
-# piece type
+# piece objects
 PLAYER = 'player'
-ENEMY_4_DIR = 'weak_enemy'
-ENEMY_8_DIR = 'strong_enemy'
+ENEMY_4_DIR = {'name': 'Weak Enemy', 'seek': [-1, 1]}
+ENEMY_8_DIR = {'name': 'Strong Enemy', 'seek': [-1, 0, 1]}
 
-# player movement
+# movement
 PLAYER_SQUARE_VALUE = max(ROWS, COLS)

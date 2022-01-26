@@ -1,6 +1,8 @@
 import pygame
-from .constants import BLACK, SQUARE_SIZE
+from .constants import BLACK, SQUARE_SIZE, WIN
+from .board import Board
 
+board = Board()
 
 class Piece:
     """Base class for making player and enemy pieces"""
@@ -11,17 +13,29 @@ class Piece:
         self.row = row
         self.col = col
         self.color = color
+        self.valid_moves = []
         self.x = self.y = 0
         self._calc_pos()
+
 
     def _calc_pos(self) -> None:
         self.x = SQUARE_SIZE * self.col + SQUARE_SIZE // 2
         self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
 
+
     def get_pos(self)->tuple:
         return (self.row, self.col)
+
 
     def draw(self, win) -> None:
         radius = SQUARE_SIZE // 2 - self.PADDING
         pygame.draw.circle(win, BLACK, (self.x, self.y), radius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
+
+    def move(self, seek_r, seek_c)->None:
+        board.draw_single_square(WIN, self.row, self.col)
+        self.row, self.col = self.row + seek_r, self.col + seek_c
+        self._calc_pos()
+        self.draw(self, WIN)
+        
+        
