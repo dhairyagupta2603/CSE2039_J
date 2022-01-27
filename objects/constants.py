@@ -2,8 +2,8 @@ import pygame
 
 
 # display window
-HEIGHT, WIDTH = 700, 700
-ROWS, COLS = 14, 14
+HEIGHT, WIDTH = 250, 250
+ROWS, COLS = 5, 5
 SQUARE_SIZE = WIDTH // COLS
 FPS = 30
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))

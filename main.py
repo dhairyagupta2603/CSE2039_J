@@ -1,34 +1,24 @@
 import pygame
-from objects.constants import WIN, FPS
+from random import randint
+from objects.constants import WIN, FPS, ROWS, COLS
 from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
-
+from game import Game
 
 pygame.display.set_caption('Kingdom of Circles')
-
-# board initialization
-board = Board()
-board.draw_squares(WIN)
-pygame.display.update()
-player = Player(1, 1)
-board.get_board_matrix(player.get_pos())
-enemy = Enemy(4, 8)
-player._draw(WIN)
-enemy._draw(WIN)
-pygame.display.update()
-
+game = Game(WIN)
 
 def main():
     run = True
     Clock = pygame.time.Clock()
-
     while run:
         Clock.tick(FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            game.player_move_control(event)
 
     pygame.quit()
 

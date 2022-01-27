@@ -1,5 +1,5 @@
 from .constants import BLUE, PLAYER
-from .piece import Piece, board
+from .piece import Piece
 
 
 class Player(Piece):
@@ -8,7 +8,7 @@ class Player(Piece):
         self._color = BLUE
         self.seek_range = PLAYER['seek']
         self._calc_pos()
-        self._valid_moves_calc()
+        self.valid_moves_calc()
 
     def player_move(self, direction: tuple) -> None:
         """Moves the player to specified loaction. also, changes position in window
@@ -17,7 +17,7 @@ class Player(Piece):
             direction (tuple): the direction which the player should move
         """
         self.move(direction)
-        board.get_board_matrix(self.get_pos())
+        self.board.get_board_matrix(self.get_pos())
 
     def __repr__(self) -> str:
         return str(self._calc_pos())
