@@ -2,7 +2,7 @@ import pygame
 
 
 # display window
-HEIGHT, WIDTH = 700, 700
+HEIGHT, WIDTH = 702, 702
 ROWS, COLS = 14, 14
 SQUARE_SIZE = WIDTH // COLS
 FPS = 30

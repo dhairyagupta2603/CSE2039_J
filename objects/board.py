@@ -1,10 +1,11 @@
 import pygame
 from random import randint
-from .constants import DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE
+from .constants import BLACK, DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE
 from pprint import pprint
 
 
 class Board:
+    __OUTLINE = 2
     def __init__(self) -> None:
         self.board_colors = [([GREEN]*COLS) for _ in range(ROWS)]
         self._board_values = [([0]*COLS) for _ in range(ROWS)]
@@ -13,43 +14,31 @@ class Board:
 
     def draw_squares(self, win) -> None:
         """Draw the visual representaion of board. Also, initializes board square colors as a matrix"""
-        win.fill(GREEN)
+        win.fill(BLACK)
+        # for row in range(ROWS):
+        #     for col in range(COLS):
+        #         if (row % 2 == 0 and col % 2 == 0) or (row % 2 != 0 and col % 2 != 0):
+        #             pygame.draw.rect(win, DARKER_GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
+        #         if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1):
+        #             pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
         for row in range(ROWS):
             for col in range(COLS):
-                if (row % 2 == 0 and col % 2 == 0) or (row % 2 != 0 and col % 2 != 0):
-                    pygame.draw.rect(
-                        win, DARKER_GREEN, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                    self.board_colors[row][col] = DARKER_GREEN
+                pygame.draw.rect(win, BLACK, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
                 if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1):
-                    pygame.draw.rect(
-                        win, GREY, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                    pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
                     self.board_colors[row][col] = GREY
+                else:
+                    pygame.draw.rect(win, GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
         # pprint(self.board_colors)
 
     def draw_single_square(self, win, row: int, col: int) -> None:
-        """Darws a single square on window at the specified place with a specified color
+        """Darws a single square on window at the specified place
 
         Args:
             row (int): row of board
             col (int): column of board
         """
-        # why ??? needed
-        for rowi in range(ROWS):
-            for colj in range(COLS):
-                if (rowi % 2 == 0 and colj % 2 == 0) or (rowi % 2 != 0 and colj % 2 != 0):
-                    pygame.draw.rect(
-                        win, DARKER_GREEN, (rowi*SQUARE_SIZE, colj*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                    self.board_colors[rowi][colj] = DARKER_GREEN
-                if (rowi == 0 or rowi == ROWS - 1) or (colj == 0 or colj == COLS - 1):
-                    pygame.draw.rect(
-                        win, GREY, (rowi*SQUARE_SIZE, colj*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                    self.board_colors[rowi][colj] = GREY
-        # pprint(self.board_colors)
-        # pprint(self.board_colors[col][row])
-        sq_color = self.board_colors[col][row]
-        # why opposite printing of row and column
-        pygame.draw.rect(win, GREY, (col*SQUARE_SIZE, row *
-                                         SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+        pygame.draw.rect(win, GREEN, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
 
     def add_enemy(self) -> None:
         self.__num_enemies += 1
