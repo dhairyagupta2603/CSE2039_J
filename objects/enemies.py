@@ -10,7 +10,7 @@ class Enemy(Piece):
         self._color = YELLOW
         self.type = ENEMY_4_DIR['name']
         self.seek_range = ENEMY_4_DIR['seek']
-        self._calc_pos()
+        self._calc_center_pixel()
 
     def upgrade(self, win) -> None:
         """Upgrades the enemy from weak to strong"""

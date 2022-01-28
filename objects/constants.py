@@ -2,8 +2,8 @@ import pygame
 
 
 # display window
-HEIGHT, WIDTH = 250, 250
-ROWS, COLS = 5, 5
+HEIGHT, WIDTH = 700, 700
+ROWS, COLS = 14, 14
 SQUARE_SIZE = WIDTH // COLS
 FPS = 30
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -11,6 +11,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 # rgb
 GREY = (127, 127, 127)
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)

@@ -1,6 +1,6 @@
 import pygame
 from random import randint
-from .constants import DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE, BLACK
+from .constants import DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE
 from pprint import pprint
 
 
@@ -48,7 +48,8 @@ class Board:
         # pprint(self.board_colors[col][row])
         sq_color = self.board_colors[col][row]
         # why opposite printing of row and column
-        pygame.draw.rect(win, sq_color, (col*SQUARE_SIZE, row*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+        pygame.draw.rect(win, GREY, (col*SQUARE_SIZE, row *
+                                         SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
     def add_enemy(self) -> None:
         self.__num_enemies += 1
@@ -89,11 +90,14 @@ class Board:
         self._board_values[px][py] = PLAYER_SQUARE_VALUE
         for row in range(ROWS):
             for col in range(COLS):
-                if randint(0, 100) < 5:
-                    square_val = 0
-                else:
-                    square_val = self.__square_vs_player_pos(px, py, row, col)
+                # if randint(0, 100) < 5:
+                #     square_val = 0
+                #     self.board_colors[row][col] = GREY
+                #     pygame.draw.rect(WIN, GREY, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                # else:
+                square_val = self.__square_vs_player_pos(px, py, row, col)
                 self._board_values[row][col] = square_val
+        pygame.display.update()
         pprint(self._board_values)
 
     def get_square_value(self, row: int, col: int) -> int:

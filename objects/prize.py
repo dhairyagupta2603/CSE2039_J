@@ -1,0 +1,22 @@
+from random import randint
+from .piece import Piece
+from .constants import WHITE, ROWS, COLS
+import pygame
+
+
+class Prize(Piece):
+    def __init__(self, win, row: int, col: int) -> None:
+        super().__init__(row, col, WHITE)
+        self._color = WHITE
+        self._calc_center_pixel()
+        self._draw(win)
+
+    def new_pos(self, win, player_pos) -> None:
+        """Draws and sets a new position on a square with no other object"""
+        self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
+        tries = (ROWS - 2)*(COLS - 2)  # so that the loop is not infinite
+        while ((self.row, self.col) in player_pos) and tries > 0:
+            self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
+            tries -= 1
+        self._draw(win)
+        pygame.display.update()

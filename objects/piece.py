@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK, SQUARE_SIZE, WIN
+from .constants import BLACK, SQUARE_SIZE
 from .board import Board
 from pprint import pprint
 
@@ -15,11 +15,11 @@ class Piece:
         self.color = color
         self.valid_moves = []
         self.__x = self.__y = 0
-        self._calc_pos()
+        self._calc_center_pixel()
         self.board = Board()
         self.board.get_board_matrix(self.get_pos())
 
-    def _calc_pos(self) -> None:
+    def _calc_center_pixel(self) -> None:
         """Calculates center pixel coordinate of square on which piece resides"""
         self.__x = SQUARE_SIZE * self.col + SQUARE_SIZE // 2
         self.__y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
@@ -30,7 +30,7 @@ class Piece:
 
     def _draw(self, win) -> None:
         """Draws the piece on the square"""
-        self._calc_pos()
+        self._calc_center_pixel()
         radius = SQUARE_SIZE // 2 - self.__PADDING
         pygame.draw.circle(win, BLACK, (self.__x, self.__y),
                            radius + self.__OUTLINE)
@@ -44,21 +44,21 @@ class Piece:
                     continue
                 x, y = self.row + r_seek, self.col + c_seek
                 if self.board.get_square_value(x, y) != 0:
-                # if self.board_matrix[x][y] != 0:
+                    # if self.board_matrix[x][y] != 0:
                     self.valid_moves.append((r_seek, c_seek))
         pprint(self.valid_moves)
 
-    def move(self, direction: tuple) -> None:
+    def move(self, win, direction: tuple) -> None:
         """Base function to move a piece. Changes the piece coordinates, draws square on previous position and draws piece on new position
 
         Args:
             direction (tuple): previous row and column of piece
         """
         seek_r, seek_c = direction
-        self.board.draw_single_square(WIN, self.row, self.col)
+        self.board.draw_single_square(win, self.row, self.col)
         self.row, self.col = self.row + seek_r, self.col + seek_c
-        self._draw(WIN)
+        self._draw(win)
         pygame.display.update()
-        
-    def clear_valid_moves(self)->None:
+
+    def clear_valid_moves(self) -> None:
         self.valid_moves = []
