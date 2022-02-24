@@ -11,14 +11,17 @@ class Game:
     def __init__(self, win) -> None:
         self.board = Board()
         self.board.draw_squares(win)
+
+        # self.prize = Prize(win, 5, 5)
+        # self.player = Player(2, 2)
         self.prize = Prize(win, randint(1, ROWS - 2), randint(1, COLS - 2))
         self.player = Player(randint(1, ROWS - 2), randint(1, COLS - 2))
-        # self.prize = Prize(win, 5, 5)
-        # self.player = Player(1, 1)
-        # self.player = Player(2, 2)
         self.player._draw(win)
         if self.player.get_pos() == self.prize.get_pos():
             self.prize.new_pos(win, self.player.get_pos())
+        self.board.update_walls_pos(win, self.player.get_pos(), self.prize.get_pos())
+        self.player.valid_moves_calc()
+        
         # self.enemies = [Enemy(randint(1, ROWS - 2), randint(1, COLS - 2))]
         # self.enemies[0]._draw(win)
         # self.board.get_board_matrix(self.player.get_pos())
@@ -54,10 +57,14 @@ class Game:
         else:
             print('Invalid key press among valid options')
         self.player.clear_valid_moves()
-
+        print(self.player.get_pos())
+        
 
     def update_prize_pos(self, win)->None:
+        """Sets and draws prize to a new location if player captures the prize"""
         if self.player.get_pos() == self.prize.get_pos():
             self.prize.new_pos(win, self.player.get_pos())
             self.score+=1
-        print(self.score)
+            self.board.get_board_matrix(self.player.get_pos())
+            self.board.update_walls_pos(win, self.player.get_pos(), self.prize.get_pos())
+        # print(self.score)

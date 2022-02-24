@@ -7,8 +7,8 @@ class Player(Piece):
         super().__init__(row, col, BLUE)
         self._color = BLUE
         self.seek_range = PLAYER['seek']
+        self.board.get_board_matrix(self.get_pos())
         self._calc_center_pixel()
-        self.valid_moves_calc()
 
     def player_move(self, win, direction: tuple) -> None:
         """Moves the player to specified loaction. also, changes position in window
