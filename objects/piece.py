@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK, GREEN, SQUARE_SIZE
+from .constants import BLACK, SQUARE_SIZE
 from .board import Board
 from pprint import pprint
 
@@ -17,6 +17,7 @@ class Piece:
         self.__x = self.__y = 0
         self._calc_center_pixel()
         self.board = Board()
+        self.board.get_board_matrix(self.get_pos())
 
     def _calc_center_pixel(self) -> None:
         """Calculates center pixel coordinate of square on which piece resides"""
@@ -42,8 +43,8 @@ class Piece:
                 if r_seek == c_seek == 0:
                     continue
                 x, y = self.row + r_seek, self.col + c_seek
-                sq_val = self.board.get_square_value(x, y)
-                if sq_val != 0:
+                if self.board.get_square_value(x, y) != 0:
+                    # if self.board_matrix[x][y] != 0:
                     self.valid_moves.append((r_seek, c_seek))
         pprint(self.valid_moves)
 
@@ -54,7 +55,7 @@ class Piece:
             direction (tuple): previous row and column of piece
         """
         seek_r, seek_c = direction
-        self.board.draw_single_square(win, self.row, self.col, GREEN)
+        self.board.draw_single_square(win, self.row, self.col)
         self.row, self.col = self.row + seek_r, self.col + seek_c
         self._draw(win)
         pygame.display.update()
