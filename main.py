@@ -17,16 +17,14 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN and game.turn == PLAYER:
                 game.player_move_control(event, WIN)
                 game.update_prize_pos(WIN)
-                game.turn = ENEMY_8_DIR
-            
-            # # prize update if enemy reaches it
-
-            # if game.turn == ENEMY_8_DIR or game.turn == ENEMY_4_DIR:
-            #     # movement of enemy
-            #     game.update_turn()
+                game.turn = ENEMY_4_DIR
+                
+            if game.turn == ENEMY_8_DIR or game.turn == ENEMY_4_DIR:
+                # movement of enemy
+                game.update_turn()
 
     pygame.quit()
 

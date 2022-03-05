@@ -9,15 +9,14 @@ class Piece:
     __PADDING = 10
     __OUTLINE = 2
 
-    def __init__(self, row: int, col: int, color: tuple) -> None:
+    def __init__(self, row: int, col: int) -> None:
         self.row = row
         self.col = col
-        self.color = color
         self.valid_moves = []
         self.__x = self.__y = 0
         self._calc_center_pixel()
         self.board = Board()
-        self.board.get_board_matrix(self.get_pos())
+        # self.board.get_board_matrix(self.get_pos())
 
     def _calc_center_pixel(self) -> None:
         """Calculates center pixel coordinate of square on which piece resides"""

@@ -9,18 +9,11 @@ class Board:
     def __init__(self) -> None:
         self.board_colors = [([GREEN]*COLS) for _ in range(ROWS)]
         self._board_values = [([0]*COLS) for _ in range(ROWS)]
-        # self.__outer_values = [0 for _ in range(2*(HEIGHT - 2) + 2(WIDTH - 4))]
         self.__num_enemies = 1
 
     def draw_squares(self, win) -> None:
         """Draw the visual representaion of board. Also, initializes board square colors as a matrix"""
         win.fill(BLACK)
-        # for row in range(ROWS):
-        #     for col in range(COLS):
-        #         if (row % 2 == 0 and col % 2 == 0) or (row % 2 != 0 and col % 2 != 0):
-        #             pygame.draw.rect(win, DARKER_GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
-        #         if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1):
-        #             pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
         for row in range(ROWS):
             for col in range(COLS):
                 pygame.draw.rect(win, BLACK, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
@@ -79,11 +72,6 @@ class Board:
         self._board_values[px][py] = PLAYER_SQUARE_VALUE
         for row in range(ROWS):
             for col in range(COLS):
-                # if randint(0, 100) < 5:
-                #     square_val = 0
-                #     self.board_colors[row][col] = GREY
-                #     pygame.draw.rect(WIN, GREY, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                # else:
                 square_val = self.__square_vs_player_pos(px, py, row, col)
                 self._board_values[row][col] = square_val
         pygame.display.update()

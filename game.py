@@ -9,26 +9,30 @@ from objects.constants import ROWS, COLS, PLAYER, ENEMY_4_DIR, ENEMY_8_DIR
 
 class Game:
     def __init__(self, win) -> None:
+        # draw board
         self.board = Board()
         self.board.draw_squares(win)
-        self.prize = Prize(win, randint(1, ROWS - 2), randint(1, COLS - 2))
+        
+        # initialize player
         self.player = Player(randint(1, ROWS - 2), randint(1, COLS - 2))
-        # self.prize = Prize(win, 5, 5)
-        # self.player = Player(1, 1)
-        # self.player = Player(2, 2)
         self.player._draw(win)
-        if self.player.get_pos() == self.prize.get_pos():
-            self.prize.new_pos(win, self.player.get_pos())
-        # self.enemies = [Enemy(randint(1, ROWS - 2), randint(1, COLS - 2))]
-        # self.enemies[0]._draw(win)
+        
+        # initilize enemies and get position
+        self.enemies = [Enemy(randint(1, ROWS - 2), randint(1, COLS - 2))]
+        if self.enemies[0].get_pos() ==  self.player.get_pos():
+            self.enemies[0].new_pos(win, self.player.get_pos())
+        self.enemies[0]._draw(win)
+        
+        # initialize prize
+        self.prize = Prize(win, randint(1, ROWS - 2), randint(1, COLS - 2))
+        if self.prize.get_pos() == self.enemies[0].get_pos() or self.prize.get_pos() == self.player.get_pos():
+            self.prize.new_pos(win, self.player.get_pos(), self.enemies[0].get_pos())
+        
         # self.board.get_board_matrix(self.player.get_pos())
         pygame.display.update()
         self.turn = PLAYER
         self.score = 0
         self.high_score = 0
-
-    # def update(self)->None:
-    #     sef.board.
 
     def _calc_enemy_pos() -> None:
         pass
@@ -58,6 +62,6 @@ class Game:
 
     def update_prize_pos(self, win)->None:
         if self.player.get_pos() == self.prize.get_pos():
-            self.prize.new_pos(win, self.player.get_pos())
+            self.prize.new_pos(win, self.player.get_pos(), self.enemies[0].get_pos())
             self.score+=1
         print(self.score)
