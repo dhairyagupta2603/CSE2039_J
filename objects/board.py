@@ -8,7 +8,7 @@ class Board:
     __OUTLINE = 2
     def __init__(self) -> None:
         self.board_colors = [([GREEN]*COLS) for _ in range(ROWS)]
-        self._board_values = [([0]*COLS) for _ in range(ROWS)]
+        self.board_matrix = [([0]*COLS) for _ in range(ROWS)]
         self.__num_enemies = 1
 
     def draw_squares(self, win) -> None:
@@ -69,15 +69,10 @@ class Board:
             player_pos (tuple): position of player
         """
         px, py = player_pos
-        self._board_values[px][py] = PLAYER_SQUARE_VALUE
+        self.board_matrix[px][py] = PLAYER_SQUARE_VALUE
         for row in range(ROWS):
             for col in range(COLS):
                 square_val = self.__square_vs_player_pos(px, py, row, col)
-                self._board_values[row][col] = square_val
+                self.board_matrix[row][col] = square_val
         pygame.display.update()
-        pprint(self._board_values)
-
-    def get_square_value(self, row: int, col: int) -> int:
-        """Returns the value of specified square"""
-        b_val = self._board_values[row][col]
-        return b_val
+        pprint(self.board_matrix)
