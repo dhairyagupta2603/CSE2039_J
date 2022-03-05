@@ -79,4 +79,5 @@ class Board:
 
     def get_square_value(self, row: int, col: int) -> int:
         """Returns the value of specified square"""
-        return self._board_values[row][col]
+        b_val = self._board_values[row][col]
+        return b_val

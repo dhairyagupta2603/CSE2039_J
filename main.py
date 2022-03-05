@@ -23,8 +23,8 @@ def main():
                 game.turn = ENEMY_4_DIR
                 
             if game.turn == ENEMY_8_DIR or game.turn == ENEMY_4_DIR:
-                # movement of enemy
-                game.update_turn()
+                game.move_enemies(WIN)
+                pass
 
     pygame.quit()
 

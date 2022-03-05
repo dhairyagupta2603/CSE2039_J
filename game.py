@@ -33,9 +33,9 @@ class Game:
         self.turn = PLAYER
         self.score = 0
         self.high_score = 0
-
-    def _calc_enemy_pos() -> None:
-        pass
+        
+    def move_enemies(self, win):
+        self.enemies[0].enemy_move(win)
 
     def player_move_control(self, event, win) -> None:
         self.player.valid_moves_calc()

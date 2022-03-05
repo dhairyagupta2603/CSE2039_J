@@ -16,7 +16,6 @@ class Piece:
         self.__x = self.__y = 0
         self._calc_center_pixel()
         self.board = Board()
-        # self.board.get_board_matrix(self.get_pos())
 
     def _calc_center_pixel(self) -> None:
         """Calculates center pixel coordinate of square on which piece resides"""
