@@ -34,7 +34,7 @@ class Enemy(Piece):
             for (mx, my) in moves:
                 for (ex, ey) in other_enemies:
                     d = sqrt((mx-ex)**2 + (my-ey)**2)
-                    if d < d_min: 
+                    if d < d_min and d != 0: 
                         d_min = d
                         min_move = (mx, my)
             return min_move
@@ -46,7 +46,7 @@ class Enemy(Piece):
             for (mx, my) in moves:
                 for (ex, ey) in other_enemies:
                     d = sqrt((mx-ex)**2 + (my-ey)**2)
-                    if d > d_max: 
+                    if d > d_max and d != 0: 
                         d_max = d
                         max_move = (mx, my)
             return max_move        
@@ -63,8 +63,10 @@ class Enemy(Piece):
             if sq_val != 0 and (x, y) != prize_pos and (x, y) not in other_enemies_pos:
                 valid_moves[sq_val].append((x, y))
         print(valid_moves)
-        x, y = self.__pick_fn(valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
-        # x, y = valid_moves[max(valid_moves.keys())][0]
+        if len(other_enemies_pos) > 1:
+            x, y = self.__pick_fn(valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
+        else:
+            x, y = valid_moves[max(valid_moves.keys())][0]
         print(f'Valid moves: {valid_moves[max(valid_moves.keys())]}')
         self.move(win, board, (x - self.row, y - self.col))
         self.row, self.col = x, y
