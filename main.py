@@ -26,6 +26,8 @@ def main():
 
             if game.turn == ENEMY_8_DIR or game.turn == ENEMY_4_DIR:
                 game.move_enemies(WIN)
+                # if game.player_killed == True:
+                #     run = False
                 game.turn = PLAYER
 
     pygame.quit()

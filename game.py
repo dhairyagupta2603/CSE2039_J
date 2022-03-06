@@ -42,7 +42,7 @@ class Game:
 
     def move_enemies(self, win):
         for i, enemy in enumerate(self.enemies):
-            enemy.enemy_move(win, self.board, self.enemies_pos, self.prize.get_pos())
+            enemy.enemy_move(win, self.board, self.enemies_pos, self.prize.get_pos(), self.player.get_pos())
             self.enemies_pos[i] = self.enemies[i].get_pos()
         if self.player.get_pos() in self.enemies_pos:
             self.player_killed = True

@@ -33,10 +33,6 @@ class Board:
         """
         pygame.draw.rect(win, GREEN, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
 
-    def add_enemy(self) -> None:
-        self.__num_enemies += 1
-        # TODO: a function to get position of new enemy
-
     def __square_vs_player_pos(self, px: int, py: int, row: int, col: int) -> int:
         """Handler function for get_board_matrix(). checks the row and column value against the given player position
 

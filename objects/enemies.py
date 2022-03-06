@@ -1,6 +1,7 @@
 from collections import defaultdict
+from math import sqrt
 from random import randint
-from .constants import RED, YELLOW, ROWS, COLS, ENEMY_4_DIR, ENEMY_8_DIR
+from .constants import RED, YELLOW, ROWS, COLS, ENEMY_4_DIR, ENEMY_8_DIR, RANGE, RHIGH, CHIGH
 from .piece import Piece
 
 
@@ -18,8 +19,42 @@ class Enemy(Piece):
         self.type = ENEMY_8_DIR['name']
         self.seek_range = ENEMY_8_DIR['seek']
         self.draw(win)
+        
+    def __pick_fn(self, moves, other_enemies, player_pos)->tuple:
+        px, py = player_pos[0], player_pos[1]
+        if (
+            (px > 0 and px < CHIGH and py > 0 and py < RHIGH) or # upper left
+            (px > 0 and px < CHIGH and py > 2*RHIGH and py < 3*RHIGH) or # upper right
+            (px > 2*CHIGH and px < 3*CHIGH and py > 0 and py < RHIGH) or # lower left
+            (px > 2*CHIGH and px < 3*CHIGH and py > 2*RHIGH and py < 3*RHIGH) # lower right
+        ):
+            # minimize distance
+            d_min = 3*sqrt(RHIGH**2 + CHIGH**2)
+            min_move = (moves[0])
+            for (mx, my) in moves:
+                for (ex, ey) in other_enemies:
+                    d = sqrt((mx-ex)**2 + (my-ey)**2)
+                    if d < d_min: 
+                        d_min = d
+                        min_move = (mx, my)
+            return min_move
+        
+        elif px > CHIGH and px < 2*CHIGH and py > RHIGH and py < 2*RHIGH:
+            # maximize distance
+            d_max = 0
+            max_move = (moves[0])
+            for (mx, my) in moves:
+                for (ex, ey) in other_enemies:
+                    d = sqrt((mx-ex)**2 + (my-ey)**2)
+                    if d > d_max: 
+                        d_max = d
+                        max_move = (mx, my)
+            return max_move        
+        
+        else:
+            return moves[randint(0, len(moves) - 1)]
 
-    def enemy_move(self, win, board, other_enemies_pos: tuple, prize_pos: tuple) -> None:
+    def enemy_move(self, win, board, other_enemies_pos: tuple, prize_pos: tuple, player_pos: tuple) -> None:
         """Moves the enemy depending on player pos. Also, changes position in window"""
         valid_moves = defaultdict(list)
         for (r_seek, c_seek) in self.seek_range:
@@ -27,9 +62,10 @@ class Enemy(Piece):
             sq_val = board.board_matrix[x][y]
             if sq_val != 0 and (x, y) != prize_pos and (x, y) not in other_enemies_pos:
                 valid_moves[sq_val].append((x, y))
-        # TODO: implement which max value move will enemy take. rn it takes 0th move
         print(valid_moves)
-        x, y = valid_moves[max(valid_moves.keys())][0]
+        x, y = self.__pick_fn(valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
+        # x, y = valid_moves[max(valid_moves.keys())][0]
+        print(f'Valid moves: {valid_moves[max(valid_moves.keys())]}')
         self.move(win, board, (x - self.row, y - self.col))
         self.row, self.col = x, y
         print((self.row, self.col))
