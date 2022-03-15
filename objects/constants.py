@@ -36,14 +36,19 @@ PLAYER_SQUARE_VALUE = max(ROWS, COLS)
 
 # board sections
 RHIGH, CHIGH = (ROWS - 2)//3, (COLS - 2)//3
-RANGE = {
-    1 : ((0, RHIGH), (0, CHIGH)),
-    2 : ((0, RHIGH), (CHIGH, 2*CHIGH)),
-    3 : ((0, RHIGH), (2*CHIGH, 3*CHIGH)),
-    4 : ((RHIGH, 2*RHIGH), (0, CHIGH)),
-    5 : ((RHIGH, 2*RHIGH), (CHIGH, 2*CHIGH)),
-    6 : ((RHIGH, 2*RHIGH), (2*CHIGH, 3*CHIGH)),
-    7 : ((2*RHIGH, 3*RHIGH), (0, CHIGH)),
-    8 : ((2*RHIGH, 3*RHIGH), (CHIGH, 2*CHIGH)),
-    9 : ((2*RHIGH, 3*RHIGH), (2*CHIGH, 3*CHIGH))
-}
+
+WALL_SQUARES = [
+    (2, 3), (2, 5), (2, 6), (2, 10), (2, 11), (2, 13),
+    (3, 2), (3, 14),
+    (4, 4), (4, 12),
+    (5, 2), (5, 14),
+    (6, 2), (6, 14),
+    (7, 8),
+    (8, 7), (8, 9),
+    (9, 8),
+    (10, 2), (10, 14),
+    (11, 2), (11, 14),
+    (12, 4), (12, 12),
+    (13, 2), (13, 14),
+    (14, 3), (14, 5), (14, 6), (14, 10), (14, 11), (14, 13)
+]

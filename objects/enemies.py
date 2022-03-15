@@ -1,7 +1,7 @@
 from collections import defaultdict
 from math import sqrt
 from random import randint
-from .constants import RED, YELLOW, ROWS, COLS, ENEMY_4_DIR, ENEMY_8_DIR, RANGE, RHIGH, CHIGH
+from .constants import RED, YELLOW, ROWS, COLS, ENEMY_4_DIR, ENEMY_8_DIR, RHIGH, CHIGH
 from .piece import Piece
 
 

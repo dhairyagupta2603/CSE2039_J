@@ -1,6 +1,6 @@
 import pygame
 from random import randint
-from .constants import BLACK, DARKER_GREEN, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE
+from .constants import BLACK, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE, WALL_SQUARES
 from pprint import pprint
 
 
@@ -17,7 +17,7 @@ class Board:
         for row in range(ROWS):
             for col in range(COLS):
                 pygame.draw.rect(win, BLACK, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1):
+                if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1) or (col, row) in WALL_SQUARES:
                     pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
                     self.board_colors[row][col] = GREY
                 else:
@@ -43,7 +43,7 @@ class Board:
         Returns:
             int: square value wrt player
         """
-        if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1):
+        if (row == 0 or row == ROWS - 1) or (col == 0 or col == COLS - 1) or (col, row) in WALL_SQUARES:
             return 0
         if row <= px and col <= py:
             return min(PLAYER_SQUARE_VALUE - px + row,
@@ -72,3 +72,5 @@ class Board:
                 self.board_matrix[row][col] = square_val
         pygame.display.update()
         pprint(self.board_matrix)
+        
+    
