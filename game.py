@@ -49,21 +49,21 @@ class Game:
 
     def player_move_control(self, event, win) -> None:
         self.player.valid_moves_calc(self.board.board_matrix)
-        if event.key == pygame.K_KP1 and (1, -1) in self.player.valid_moves:
+        if event.key == pygame.K_z and (1, -1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (1, -1))
-        elif event.key == pygame.K_KP2 and (1, 0) in self.player.valid_moves:
+        elif event.key == pygame.K_x and (1, 0) in self.player.valid_moves:
             self.player.player_move(win, self.board, (1, 0))
-        elif event.key == pygame.K_KP3 and (1, 1) in self.player.valid_moves:
+        elif event.key == pygame.K_c and (1, 1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (1, 1))
-        elif event.key == pygame.K_KP4 and (0, -1) in self.player.valid_moves:
+        elif event.key == pygame.K_a and (0, -1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (0, -1))
-        elif event.key == pygame.K_KP6 and (0, 1) in self.player.valid_moves:
+        elif event.key == pygame.K_d and (0, 1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (0, 1))
-        elif event.key == pygame.K_KP7 and (-1, -1) in self.player.valid_moves:
+        elif event.key == pygame.K_q and (-1, -1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (-1, -1))
-        elif event.key == pygame.K_KP8 and (-1, 0) in self.player.valid_moves:
+        elif event.key == pygame.K_w and (-1, 0) in self.player.valid_moves:
             self.player.player_move(win, self.board, (-1, 0))
-        elif event.key == pygame.K_KP9 and (-1, 1) in self.player.valid_moves:
+        elif event.key == pygame.K_e and (-1, 1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (-1, 1))
         else:
             print('Invalid key press among valid options')
