@@ -1,5 +1,5 @@
 import pygame
-from objects.constants import ENEMY_4_DIR, ENEMY_8_DIR, PLAYER, WIDTH, HEIGHT
+from objects.constants import WIDTH, HEIGHT
 from game import Game
 
 
@@ -19,16 +19,16 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-            if event.type == pygame.KEYDOWN and game.turn == PLAYER:
+            if event.type == pygame.KEYDOWN and game.player_turn == True:
                 game.player_move_control(event, WIN)
                 game.update_prize_pos(WIN)
-                game.turn = ENEMY_4_DIR
+                game.player_turn = False
 
-            if game.turn == ENEMY_8_DIR or game.turn == ENEMY_4_DIR:
+            if game.player_turn == False:
                 game.move_enemies(WIN)
                 # if game.player_killed == True:
                 #     run = False
-                game.turn = PLAYER
+                game.player_turn = True
 
     pygame.quit()
 

@@ -1,7 +1,6 @@
 from random import randint
 from .piece import Piece
 from .constants import WHITE, ROWS, COLS
-import pygame
 
 
 class Prize(Piece):

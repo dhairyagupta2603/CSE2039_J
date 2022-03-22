@@ -1,10 +1,11 @@
 import pygame
+from math import sqrt
 from random import randint
 from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
-from objects.constants import ROWS, COLS, PLAYER, MAX_NUM_ENEMIES
+from objects.constants import ROWS, COLS, PLAYER, PLAYER_SQUARE_VALUE
 
 
 class Game:
@@ -35,9 +36,10 @@ class Game:
 
         self.board.get_board_matrix(self.player.get_pos())
         pygame.display.update()
-        self.turn = PLAYER
+        self.player_turn = True
         self.player_killed = False
         self.score = 0
+        self.MAX_NUM_ENEMIES = 1
         self.high_score = 0
 
     def move_enemies(self, win):
@@ -78,15 +80,33 @@ class Game:
             self.score += 1
             self.update_difficulty(win)
         print(self.score)
+    
+    def __remove_enemies(self, win)->None:
+        pass
+        
+    def upgrade_closest_enemy(self, win)->None:
+        min_dist = PLAYER_SQUARE_VALUE
+        idx = 0
+        px, py = self.player.get_pos()
+        for i, enemy in enumerate(self.enemies):
+            ex, ey = enemy.get_pos()
+            d = sqrt((px-ex)**2 + (py-ey)**2)
+            if d <  min_dist:
+                min_dist = d
+                idx = i
+        # we get enemy having min distance from player position
+        self.enemies[idx].upgrade(win)
 
     def update_difficulty(self, win) -> None:
-        if self.num_enemies < MAX_NUM_ENEMIES and randint(0, 100) < 50:
+        if self.num_enemies < self.MAX_NUM_ENEMIES and randint(0, 100) < 50:
             self.num_enemies+=1;
             self.enemies.append(Enemy(randint(1, ROWS - 2), randint(1, COLS - 2)))
             if self.enemies[self.num_enemies-1].get_pos() == self.player.get_pos():
                 self.enemies[self.num_enemies-1].new_pos(self.player.get_pos(), self.enemies_pos, self.prize.get_pos())
             self.enemies[self.num_enemies-1].draw(win)
             self.enemies_pos.append(self.enemies[self.num_enemies-1].get_pos())
+        elif self.num_enemies == self.MAX_NUM_ENEMIES:
+            self.upgrade_closest_enemy(win)
 
     def is_player_dead(self) -> bool:
         pass

@@ -29,8 +29,6 @@ ENEMY_8_DIR = {'name': 'Strong Enemy',
                'seek': [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
                }
 
-MAX_NUM_ENEMIES = 3
-
 # movement
 PLAYER_SQUARE_VALUE = max(ROWS, COLS)
 

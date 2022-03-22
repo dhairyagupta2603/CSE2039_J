@@ -1,6 +1,5 @@
 import pygame
 from .constants import BLACK, SQUARE_SIZE
-from .board import Board
 
 class Piece:
     """Base class for making player and enemy pieces"""
