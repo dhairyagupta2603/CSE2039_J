@@ -5,12 +5,12 @@ from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
-from objects.constants import ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES
+from objects.constants import BLACK, GREY, BLUE, ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES, WHITE, FONT, SCORE_COORD
 
 
 class Game:
     def __init__(self, win) -> None:
-        # draw boardtill 
+        # draw boardtill
         self.board = Board()
         self.board.draw_squares(win)
 
@@ -30,21 +30,24 @@ class Game:
         # initialize prize
         self.prize = Prize(randint(1, ROWS - 2), randint(1, COLS - 2))
         if self.prize.get_pos() == self.enemies[0].get_pos() or self.prize.get_pos() == self.player.get_pos() or self.prize.get_pos() in WALL_SQUARES:
-            self.prize.new_pos(self.player.get_pos(),
-                               self.enemies_pos)
+            self.prize.new_pos(self.player.get_pos(), self.enemies_pos)
         self.prize.draw(win)
 
         self.board.get_board_matrix(self.player.get_pos())
+
+        # Text display
+        self.score = 0
+        self.show_score(win)
         pygame.display.update()
         self.player_turn = True
         self.player_killed = False
-        self.score = 0
         self.MAX_NUM_ENEMIES = 1
         self.high_score = 0
 
     def move_enemies(self, win):
         for i, enemy in enumerate(self.enemies):
-            enemy.enemy_move(win, self.board, self.enemies_pos, self.prize.get_pos(), self.player.get_pos())
+            enemy.enemy_move(win, self.board, self.enemies_pos,
+                             self.prize.get_pos(), self.player.get_pos())
             self.enemies_pos[i] = self.enemies[i].get_pos()
         if self.player.get_pos() in self.enemies_pos:
             self.player_killed = True
@@ -76,22 +79,24 @@ class Game:
             self.prize.new_pos(self.player.get_pos(),
                                self.enemies[0].get_pos())
             self.prize.draw(win)
-            pygame.display.update()
             self.score += 1
-            self.update_difficulty(win)
+            self.show_score(win)
+            pygame.display.update()
+            # self.update_difficulty(win)
         print(self.score)
-    
-    def __remove_enemies(self, win)->None:
+
+    def __remove_enemies(self, win) -> None:
+        # TODO: remove all enemies when enemies is equal to max enemies
         pass
-        
-    def upgrade_closest_enemy(self, win)->None:
+
+    def upgrade_closest_enemy(self, win) -> None:
         min_dist = PLAYER_SQUARE_VALUE
         idx = 0
         px, py = self.player.get_pos()
         for i, enemy in enumerate(self.enemies):
             ex, ey = enemy.get_pos()
             d = sqrt((px-ex)**2 + (py-ey)**2)
-            if d <  min_dist:
+            if d < min_dist:
                 min_dist = d
                 idx = i
         # we get enemy having min distance from player position
@@ -99,14 +104,23 @@ class Game:
 
     def update_difficulty(self, win) -> None:
         if self.num_enemies < self.MAX_NUM_ENEMIES and randint(0, 100) < 50:
-            self.num_enemies+=1;
-            self.enemies.append(Enemy(randint(1, ROWS - 2), randint(1, COLS - 2)))
+            self.num_enemies += 1
+            self.enemies.append(
+                Enemy(randint(1, ROWS - 2), randint(1, COLS - 2)))
             if self.enemies[self.num_enemies-1].get_pos() == self.player.get_pos():
-                self.enemies[self.num_enemies-1].new_pos(self.player.get_pos(), self.enemies_pos, self.prize.get_pos())
+                self.enemies[self.num_enemies-1].new_pos(
+                    self.player.get_pos(), self.enemies_pos, self.prize.get_pos())
             self.enemies[self.num_enemies-1].draw(win)
             self.enemies_pos.append(self.enemies[self.num_enemies-1].get_pos())
         elif self.num_enemies == self.MAX_NUM_ENEMIES:
             self.upgrade_closest_enemy(win)
 
     def is_player_dead(self) -> bool:
+        # TODO: define player kill condition
         pass
+        
+    def show_score(self, win) -> None:
+        self.board.draw_single_square(win, 0, 2, GREY) # to fix text overlap when updated
+        pygame.display.update()
+        score_disp = FONT.render(f'Score: {self.score}', True, BLUE)
+        win.blit(score_disp, SCORE_COORD)

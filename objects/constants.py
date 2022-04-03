@@ -1,6 +1,5 @@
 import pygame
 
-
 # display window
 HEIGHT, WIDTH = 682, 682
 ROWS, COLS = 17, 17
@@ -16,6 +15,11 @@ GREEN = (0, 255, 0)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
 VIOLET = (127, 0, 255)
+
+# display text
+pygame.font.init()
+FONT = pygame.font.Font('freesansbold.ttf', 20)
+SCORE_COORD = (20, 10)
 
 # piece objects
 PLAYER = {

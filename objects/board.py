@@ -24,14 +24,14 @@ class Board:
                     pygame.draw.rect(win, GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
         # pprint(self.board_colors)
 
-    def draw_single_square(self, win, row: int, col: int) -> None:
+    def draw_single_square(self, win, row: int, col: int, color: tuple) -> None:
         """Darws a single square on window at the specified place
 
         Args:
             row (int): row of board
             col (int): column of board
         """
-        pygame.draw.rect(win, GREEN, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
+        pygame.draw.rect(win, color, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
 
     def __square_vs_player_pos(self, px: int, py: int, row: int, col: int) -> int:
         """Handler function for get_board_matrix(). checks the row and column value against the given player position

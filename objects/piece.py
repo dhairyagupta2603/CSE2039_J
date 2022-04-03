@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK, SQUARE_SIZE
+from .constants import BLACK, GREEN, SQUARE_SIZE
 
 class Piece:
     """Base class for making player and enemy pieces"""
@@ -36,7 +36,7 @@ class Piece:
             direction (tuple): previous row and column of piece
         """
         seek_r, seek_c = direction
-        board.draw_single_square(win, self.row, self.col)
+        board.draw_single_square(win, self.row, self.col, GREEN)
         self.row, self.col = self.row + seek_r, self.col + seek_c
         self.draw(win)
         pygame.display.update()
