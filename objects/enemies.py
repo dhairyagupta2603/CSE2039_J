@@ -1,16 +1,21 @@
 from collections import defaultdict
 from math import sqrt
 from random import randint
-from .constants import RED, YELLOW, ROWS, COLS, ENEMY_4_DIR, ENEMY_8_DIR, RHIGH, CHIGH
+from .constants import RED, VIOLET, YELLOW, ROWS, COLS, ENEMY_DIAG, ENEMY_4_DIR, ENEMY_8_DIR, RHIGH, CHIGH, WALL_SQUARES
 from .piece import Piece
 
 
 class Enemy(Piece):
     def __init__(self, row: int, col: int) -> None:
         super().__init__(row, col)
-        self.color = YELLOW
-        self.type = ENEMY_4_DIR['name']
-        self.seek_range = ENEMY_4_DIR['seek']
+        if randint(0, 1) == 1:
+            self.color = YELLOW
+            self.type = ENEMY_4_DIR['name']
+            self.seek_range = ENEMY_4_DIR['seek']
+        else:
+            self.color = VIOLET
+            self.type = ENEMY_DIAG['name']
+            self.seek_range = ENEMY_DIAG['seek']
         self._calc_center_pixel()
 
     def upgrade(self, win) -> None:
@@ -62,7 +67,9 @@ class Enemy(Piece):
             sq_val = board.board_matrix[x][y]
             if sq_val != 0 and (x, y) != prize_pos and (x, y) not in other_enemies_pos:
                 valid_moves[sq_val].append((x, y))
-        print(valid_moves)
+        print('Enemy moves: ', valid_moves)
+        if len(valid_moves) < 1:
+            return
         if len(other_enemies_pos) > 1:
             x, y = self.__pick_fn(valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
         else:
@@ -76,7 +83,7 @@ class Enemy(Piece):
         """Draws and sets a new position on a square with no other object"""
         self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
         tries = (ROWS - 2)*(COLS - 2)  # so that the loop is not infinite
-        while ((self.row, self.col) == player_pos or (self.row, self.col) in other_enemies or (self.row, self.col) == prize_pos) and tries > 0:
+        while ((self.row, self.col) == player_pos or (self.row, self.col) in other_enemies or (self.row, self.col) == prize_pos or (self.row, self.col) in WALL_SQUARES) and tries > 0:
             self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
             tries -= 1
 

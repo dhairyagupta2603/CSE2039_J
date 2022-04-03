@@ -5,7 +5,7 @@ from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
-from objects.constants import ROWS, COLS, PLAYER, PLAYER_SQUARE_VALUE
+from objects.constants import ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES
 
 
 class Game:
@@ -20,7 +20,7 @@ class Game:
 
         # initilize enemies and get position
         self.enemies = [Enemy(randint(1, ROWS - 2), randint(1, COLS - 2))]
-        if self.enemies[0].get_pos() == self.player.get_pos():
+        if self.enemies[0].get_pos() == self.player.get_pos() or self.enemies[0].get_pos() in WALL_SQUARES:
             self.enemies[0].new_pos(self.player.get_pos(), (-1, 1), (-1, -1))
         self.enemies[0].draw(win)
         self.enemies_pos = [enemy.get_pos() for enemy in self.enemies]
@@ -29,7 +29,7 @@ class Game:
 
         # initialize prize
         self.prize = Prize(randint(1, ROWS - 2), randint(1, COLS - 2))
-        if self.prize.get_pos() == self.enemies[0].get_pos() or self.prize.get_pos() == self.player.get_pos():
+        if self.prize.get_pos() == self.enemies[0].get_pos() or self.prize.get_pos() == self.player.get_pos() or self.prize.get_pos() in WALL_SQUARES:
             self.prize.new_pos(self.player.get_pos(),
                                self.enemies_pos)
         self.prize.draw(win)

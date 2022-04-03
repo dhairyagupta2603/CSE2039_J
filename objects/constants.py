@@ -15,19 +15,28 @@ YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
+VIOLET = (127, 0, 255)
 
 # piece objects
-PLAYER = {'name': 'Player',
-          'seek': [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-          }
+PLAYER = {
+    'name': 'Player',
+    'seek': [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+}
 
-ENEMY_4_DIR = {'name': 'Weak Enemy', 
-               'seek': [(-1, 0), (0, -1), (0, 1), (1, 0)]
-               }
+ENEMY_4_DIR = {
+    'name': 'Weak Enemy',
+    'seek': [(-1, 0), (0, -1), (0, 1), (1, 0)]
+}
 
-ENEMY_8_DIR = {'name': 'Strong Enemy', 
-               'seek': [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-               }
+ENEMY_8_DIR = {
+    'name': 'Strong Enemy',
+    'seek': [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+}
+
+ENEMY_DIAG = {
+    'name': 'Diagonal Enemy',
+    'seek': [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+}
 
 # movement
 PLAYER_SQUARE_VALUE = max(ROWS, COLS)
