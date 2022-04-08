@@ -1,7 +1,11 @@
 import pygame
 
+# firebase user details
+gamescore = 10
+username = ''
 # display window
 HEIGHT, WIDTH = 682, 682
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 ROWS, COLS = 17, 17
 SQUARE_SIZE = WIDTH // COLS
 

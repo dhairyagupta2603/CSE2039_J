@@ -1,5 +1,6 @@
+from asyncio import constants
 from pyrebase import pyrebase
-
+from constants import WIN
 config = {
     "apiKey": "AIzaSyDCE-OZxIDIWvZ2-adM5xHRii8iZzAsVvE",
     "authDomain": "aipygamescore.firebaseapp.com",
@@ -14,5 +15,8 @@ config = {
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
 
-def get_username():
+def senddata(username, score):
+    data = {"score": score}
+    database.child(username).set(data)
+def checkhigh(score):
     pass

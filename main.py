@@ -1,5 +1,5 @@
 import pygame
-from objects.constants import WIDTH, HEIGHT
+from objects.constants import WIDTH, HEIGHT, WIN
 from game import Game
 
 
