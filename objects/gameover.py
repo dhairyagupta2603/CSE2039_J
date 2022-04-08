@@ -1,11 +1,13 @@
 import firebasescore
 #from mainmenu import usertext
+from game import Game
 from sympy import false
 import constants
 import pygame,sys
 from constants import BLACK, WHITE, WIN, RED, BLUE, GREEN, YELLOW
 from constants import FONT as font
 
+g = Game(WIN)
 
 clock = pygame.time.Clock()
 pygame.display.set_caption("Main-Menu")
@@ -27,7 +29,7 @@ def showscreen(win):
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_rect.collidepoint(event.pos):
-                    #firebasescore.senddata(usertext, 10)
+                    #firebasescore.senddata(usertext, g.score)
                     pygame.quit()
                     sys.exit()
                 if restart_rect.collidepoint(event.pos):
