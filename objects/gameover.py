@@ -1,6 +1,6 @@
 import firebasescore
+#from mainmenu import usertext
 from sympy import false
-from main import main
 import constants
 import pygame,sys
 from constants import BLACK, WHITE, WIN, RED, BLUE, GREEN, YELLOW
@@ -27,10 +27,11 @@ def showscreen(win):
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_rect.collidepoint(event.pos):
+                    #firebasescore.senddata(usertext, 10)
                     pygame.quit()
                     sys.exit()
                 if restart_rect.collidepoint(event.pos):
-                    main()
+                    pass
 
         win.fill(BLACK)
         pygame.draw.rect(win, RED, quit_rect, 2)

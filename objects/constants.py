@@ -10,6 +10,7 @@ ROWS, COLS = 17, 17
 SQUARE_SIZE = WIDTH // COLS
 
 # rgb
+PINK = (255, 84, 189)
 GREY = (127, 127, 127)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -23,6 +24,7 @@ VIOLET = (127, 0, 255)
 # display text
 pygame.font.init()
 FONT = pygame.font.Font('freesansbold.ttf', 20)
+TITLE_FONT = pygame.font.Font('C:\Windows\Fonts\courbd.ttf', 25)
 SCORE_COORD = (20, 10)
 
 # piece objects
