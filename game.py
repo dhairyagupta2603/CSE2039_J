@@ -1,10 +1,12 @@
 import pygame
 from math import sqrt
 from random import randint
+from objects import gameover
 from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
+from objects import firebasescore
 from objects.constants import BLACK, GREY, BLUE, ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES, WHITE, FONT, SCORE_COORD
 
 

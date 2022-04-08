@@ -16,7 +16,9 @@ firebase = pyrebase.initialize_app(config)
 database = firebase.database()
 
 def senddata(username, score):
-    data = {"score": score}
-    database.child(username).set(data)
-def checkhigh(score):
-    pass
+    data = {"Username": username,"score": score}
+    database.child("All scores").push(data)
+    v = database.child("HighScore").get()
+    value = (v.val().get("score"))
+    if (score > value):
+        database.child("HighScore").set(data)

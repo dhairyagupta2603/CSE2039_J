@@ -30,7 +30,7 @@ while(True):
                 constants.username = usertext
                 print(constants.username)
             elif quit_rect.collidepoint(event.pos):
-                firebasescore.senddata(usertext, 10)
+                firebasescore.senddata(usertext, 20)
                 pygame.quit()
                 sys.exit()
             else:
