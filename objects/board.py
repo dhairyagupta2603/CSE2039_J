@@ -21,6 +21,8 @@ class Board:
                     pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
                     self.board_colors[row][col] = GREY
                 else:
+                    img = pygame.image.load(r"textures\grass2.png")
+                    win.blit(img, (row, col))
                     pygame.draw.rect(win, GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
         # pprint(self.board_colors)
 
@@ -31,6 +33,8 @@ class Board:
             row (int): row of board
             col (int): column of board
         """
+        img = pygame.image.load(r"textures\grass2.png")
+        win.blit(img, (row, col))
         pygame.draw.rect(win, color, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
 
     def __square_vs_player_pos(self, px: int, py: int, row: int, col: int) -> int:
