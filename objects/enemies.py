@@ -11,7 +11,6 @@ class Enemy(Piece):
         super().__init__(row, col)
         if randint(0, 1) == 1:
             self.color = YELLOW
-            self.texture = pygame.image.load(r"textures\enemy1.png")
             self.type = ENEMY_4_DIR['name']
             self.seek_range = ENEMY_4_DIR['seek']
         else:
@@ -29,6 +28,7 @@ class Enemy(Piece):
 
     def __pick_fn(self, moves, other_enemies, player_pos) -> tuple:
         px, py = player_pos[0], player_pos[1]
+
         if (
             (px > 0 and px < CHIGH and py > 0 and py < RHIGH) or  # upper left
             (px > 0 and px < CHIGH and py > 2*RHIGH and py < 3*RHIGH) or  # upper right
@@ -71,6 +71,7 @@ class Enemy(Piece):
             if sq_val != 0 and (x, y) != prize_pos and (x, y) not in other_enemies_pos:
                 valid_moves[sq_val].append((x, y))
         print('Enemy moves: ', valid_moves)
+
         if len(valid_moves) < 1:
             return
         if len(other_enemies_pos) > 1:
@@ -86,6 +87,7 @@ class Enemy(Piece):
     def new_pos(self, player_pos: tuple, other_enemies: tuple, prize_pos: tuple) -> None:
         """Draws and sets a new position on a square with no other object"""
         self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
+
         tries = (ROWS - 2)*(COLS - 2)  # so that the loop is not infinite
         while ((self.row, self.col) == player_pos or (self.row, self.col) in other_enemies or (self.row, self.col) == prize_pos or (self.row, self.col) in WALL_SQUARES) and tries > 0:
             self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)

@@ -1,5 +1,4 @@
 import pygame
-from random import randint
 from .constants import BLACK, GREEN, GREY, ROWS, COLS, SQUARE_SIZE, PLAYER_SQUARE_VALUE, WALL_SQUARES
 from pprint import pprint
 
@@ -9,7 +8,6 @@ class Board:
     def __init__(self) -> None:
         self.board_colors = [([GREEN]*COLS) for _ in range(ROWS)]
         self.board_matrix = [([0]*COLS) for _ in range(ROWS)]
-        self.__num_enemies = 1
 
     def draw_squares(self, win) -> None:
         """Draw the visual representaion of board. Also, initializes board square colors as a matrix"""
@@ -21,10 +19,7 @@ class Board:
                     pygame.draw.rect(win, GREY, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
                     self.board_colors[row][col] = GREY
                 else:
-                    # img = pygame.image.load(r"textures\grass2.png")
-                    # win.blit(img, (row, col))
                     pygame.draw.rect(win, GREEN, (row*SQUARE_SIZE + self.__OUTLINE, col*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
-        # pprint(self.board_colors)
 
     def draw_single_square(self, win, row: int, col: int, color: tuple) -> None:
         """Darws a single square on window at the specified place
@@ -33,8 +28,6 @@ class Board:
             row (int): row of board
             col (int): column of board
         """
-        # img = pygame.image.load(r"textures\grass2.png")
-        # win.blit(img, (row, col))
         pygame.draw.rect(win, color, (col*SQUARE_SIZE + self.__OUTLINE, row*SQUARE_SIZE + self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE, SQUARE_SIZE - self.__OUTLINE))
 
     def __square_vs_player_pos(self, px: int, py: int, row: int, col: int) -> int:

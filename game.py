@@ -49,12 +49,14 @@ class Game:
             enemy.enemy_move(win, self.board, self.enemies_pos,
                              self.prize.get_pos(), self.player.get_pos())
             self.enemies_pos[i] = self.enemies[i].get_pos()
+
         if self.player.get_pos() in self.enemies_pos:
             self.player_killed = True
 
     def player_move_control(self, event, win) -> None:
         '''Controls the player movement on the board'''
         self.player.valid_moves_calc(self.board.board_matrix)
+
         if event.key == pygame.K_z and (1, -1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (1, -1))
         elif event.key == pygame.K_x and (1, 0) in self.player.valid_moves:
@@ -73,6 +75,7 @@ class Game:
             self.player.player_move(win, self.board, (-1, 1))
         else:
             print('Invalid key press among valid options')
+
         self.player.valid_moves = []
 
     def update_prize_pos(self, win) -> None:
@@ -96,6 +99,7 @@ class Game:
         min_dist = PLAYER_SQUARE_VALUE
         idx = 0
         px, py = self.player.get_pos()
+        
         for i, enemy in enumerate(self.enemies):
             ex, ey = enemy.get_pos()
             d = sqrt((px-ex)**2 + (py-ey)**2)
@@ -111,11 +115,13 @@ class Game:
             self.num_enemies += 1
             self.enemies.append(
                 Enemy(randint(1, ROWS - 2), randint(1, COLS - 2)))
+            
             if self.enemies[self.num_enemies-1].get_pos() == self.player.get_pos():
                 self.enemies[self.num_enemies-1].new_pos(
                     self.player.get_pos(), self.enemies_pos, self.prize.get_pos())
             self.enemies[self.num_enemies-1].draw(win)
             self.enemies_pos.append(self.enemies[self.num_enemies-1].get_pos())
+            
         elif self.num_enemies == self.MAX_NUM_ENEMIES:
             self.upgrade_closest_enemy(win)
 

@@ -8,7 +8,6 @@ class Player(Piece):
     def __init__(self, row: int, col: int) -> None:
         super().__init__(row, col)
         self.color = BLUE
-        self.texture = pygame.image.load(r"textures\user.png")
         self.seek_range = PLAYER['seek']
         self._calc_center_pixel()
         self.valid_moves = []

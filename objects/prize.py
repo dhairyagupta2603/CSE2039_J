@@ -1,17 +1,13 @@
 from random import randint
 from .piece import Piece
-import pygame
-from .constants import WHITE, ROWS, COLS, WALL_SQUARES, WIN
+from .constants import WHITE, ROWS, COLS, WALL_SQUARES
 
 
 class Prize(Piece):
     def __init__(self, row: int, col: int) -> None:
         super().__init__(row, col)
         self.color = WHITE
-        self.texture = pygame.image.load(r"textures\prize.png")
         self._calc_center_pixel()
-        # image = pygame.image.load(r"textures\prize.png")
-        # self.draw(WIN, image)
 
     def new_pos(self, player_pos: tuple, enemies_pos: tuple) -> None:
         """Draws and sets a new position on a square with no other object"""

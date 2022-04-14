@@ -1,4 +1,3 @@
-from matplotlib import image
 import pygame
 from .constants import BLACK, GREEN, SQUARE_SIZE
 
@@ -30,8 +29,6 @@ class Piece():
         pygame.draw.circle(win, BLACK, (self.__x, self.__y),
                            radius + self.__OUTLINE)
         pygame.draw.circle(win, self.color, (self.__x, self.__y), radius)
-        # image = pygame.image.load(r"textures\user.png")
-        # win.blit(self.texture, (self.__x, self.__y))
 
     def move(self, win, board, direction: tuple) -> None:
         """Base function to move a piece. Changes the piece coordinates, draws square on previous position and draws piece on new position
