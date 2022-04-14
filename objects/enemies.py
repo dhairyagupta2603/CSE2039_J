@@ -26,14 +26,15 @@ class Enemy(Piece):
         self.type = ENEMY_8_DIR['name']
         self.seek_range = ENEMY_8_DIR['seek']
         self.draw(win)
-        
-    def __pick_fn(self, moves, other_enemies, player_pos)->tuple:
+
+    def __pick_fn(self, moves, other_enemies, player_pos) -> tuple:
         px, py = player_pos[0], player_pos[1]
         if (
-            (px > 0 and px < CHIGH and py > 0 and py < RHIGH) or # upper left
-            (px > 0 and px < CHIGH and py > 2*RHIGH and py < 3*RHIGH) or # upper right
-            (px > 2*CHIGH and px < 3*CHIGH and py > 0 and py < RHIGH) or # lower left
-            (px > 2*CHIGH and px < 3*CHIGH and py > 2*RHIGH and py < 3*RHIGH) # lower right
+            (px > 0 and px < CHIGH and py > 0 and py < RHIGH) or  # upper left
+            (px > 0 and px < CHIGH and py > 2*RHIGH and py < 3*RHIGH) or  # upper right
+            (px > 2*CHIGH and px < 3*CHIGH and py > 0 and py < RHIGH) or  # lower left
+            (px > 2*CHIGH and px < 3*CHIGH and py >
+             2*RHIGH and py < 3*RHIGH)  # lower right
         ):
             # minimize distance
             d_min = 3*sqrt(RHIGH**2 + CHIGH**2)
@@ -41,11 +42,11 @@ class Enemy(Piece):
             for (mx, my) in moves:
                 for (ex, ey) in other_enemies:
                     d = sqrt((mx-ex)**2 + (my-ey)**2)
-                    if d < d_min and d != 0: 
+                    if d < d_min and d != 0:
                         d_min = d
                         min_move = (mx, my)
             return min_move
-        
+
         elif px > CHIGH and px < 2*CHIGH and py > RHIGH and py < 2*RHIGH:
             # maximize distance
             d_max = 0
@@ -53,11 +54,11 @@ class Enemy(Piece):
             for (mx, my) in moves:
                 for (ex, ey) in other_enemies:
                     d = sqrt((mx-ex)**2 + (my-ey)**2)
-                    if d > d_max and d != 0: 
+                    if d > d_max and d != 0:
                         d_max = d
                         max_move = (mx, my)
-            return max_move        
-        
+            return max_move
+
         else:
             return moves[randint(0, len(moves) - 1)]
 
@@ -73,7 +74,8 @@ class Enemy(Piece):
         if len(valid_moves) < 1:
             return
         if len(other_enemies_pos) > 1:
-            x, y = self.__pick_fn(valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
+            x, y = self.__pick_fn(
+                valid_moves[max(valid_moves.keys())], other_enemies_pos, player_pos)
         else:
             x, y = valid_moves[max(valid_moves.keys())][0]
         print(f'Valid moves: {valid_moves[max(valid_moves.keys())]}')
@@ -88,6 +90,3 @@ class Enemy(Piece):
         while ((self.row, self.col) == player_pos or (self.row, self.col) in other_enemies or (self.row, self.col) == prize_pos or (self.row, self.col) in WALL_SQUARES) and tries > 0:
             self.row, self.col = randint(1, ROWS - 2), randint(1, COLS - 2)
             tries -= 1
-
-    def __repr__(self) -> str:
-        return str(self.color)

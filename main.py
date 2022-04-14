@@ -1,11 +1,12 @@
 import sys
 import pygame
-from objects.constants import GREEN, WIN, BLACK, RED, WHITE, LIGHT_BLUE, CENTER_H, CENTER_W, GAME_NAME, PINK, BOTTLE_GREEN
 import firebasescore
 from game import Game
+from objects.constants import GREEN, WIN, BLACK, RED, WHITE, LIGHT_BLUE, CENTER_H, CENTER_W, GAME_NAME, PINK, BOTTLE_GREEN
 
 
 def game_play(win, clock, fps: int, user_name) -> int:
+    '''Display game screen'''
     game = Game(win)
     run = True
     while run:
@@ -32,7 +33,8 @@ def game_play(win, clock, fps: int, user_name) -> int:
     return game.score
 
 
-def game_over(win, clock, fps: int, score: int, is_same_player: bool, is_playing: bool) -> bool:
+def game_over(win, clock, fps: int, score: int, is_same_player: bool) -> bool:
+    '''Display Game Over Screen'''
     # define rectangle dimensions
     game_over_rect = pygame.Rect(CENTER_W - 250, CENTER_H - 250, 500, 100)
     score_rect = pygame.Rect(CENTER_W - 110, CENTER_H - 150, 220, 65)
@@ -82,6 +84,7 @@ def game_over(win, clock, fps: int, score: int, is_same_player: bool, is_playing
 
 
 def main_menu(win, clock, fps: int, is_playing) -> bool:
+    '''Display the main menu'''
     input_text = 'Enter your username:'
     starttext = 'START'
     endtext = 'QUIT'
@@ -163,8 +166,7 @@ def main():
     while is_playing:
         if is_same_player == True:
             score = game_play(WIN, Clock, FPS, user_name)
-            is_same_player = game_over(
-                WIN, Clock, FPS, score, is_same_player, is_playing)
+            is_same_player = game_over(WIN, Clock, FPS, score, is_same_player)
         else:
             is_same_player = True
             is_playing, user_name = main_menu(WIN, Clock, FPS, is_playing)

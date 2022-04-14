@@ -2,6 +2,7 @@ from matplotlib import image
 import pygame
 from .constants import BLACK, GREEN, SQUARE_SIZE
 
+
 class Piece():
     """Base class for making player and enemy pieces"""
     __PADDING = 10

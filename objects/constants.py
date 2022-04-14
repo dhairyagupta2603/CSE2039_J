@@ -1,12 +1,6 @@
 import pygame
 pygame.init()
 
-
-# firebase user details
-gamescore = 10
-username = ''
-
-
 # display window
 HEIGHT, WIDTH = 682, 682
 CENTER_H, CENTER_W = HEIGHT//2, WIDTH//2
@@ -71,4 +65,3 @@ WALL_SQUARES = [
     (13, 2), (13, 14),
     (14, 3), (14, 5), (14, 6), (14, 10), (14, 11), (14, 13)
 ]
-

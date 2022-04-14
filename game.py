@@ -1,12 +1,10 @@
 import pygame
 from math import sqrt
 from random import randint
-#from objects import gameover
 from objects.board import Board
 from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
-#from objects import firebasescore
 from objects.constants import GREY, BLUE, ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES
 
 
@@ -46,6 +44,7 @@ class Game:
         self.MAX_NUM_ENEMIES = 2
 
     def move_enemies(self, win):
+        '''Moves all the available enemies on the board with respect to the player and each other'''
         for i, enemy in enumerate(self.enemies):
             enemy.enemy_move(win, self.board, self.enemies_pos,
                              self.prize.get_pos(), self.player.get_pos())
@@ -54,6 +53,7 @@ class Game:
             self.player_killed = True
 
     def player_move_control(self, event, win) -> None:
+        '''Controls the player movement on the board'''
         self.player.valid_moves_calc(self.board.board_matrix)
         if event.key == pygame.K_z and (1, -1) in self.player.valid_moves:
             self.player.player_move(win, self.board, (1, -1))
@@ -76,6 +76,7 @@ class Game:
         self.player.valid_moves = []
 
     def update_prize_pos(self, win) -> None:
+        '''Updates prize position on the board'''
         if self.player.get_pos() == self.prize.get_pos():
             self.prize.new_pos(self.player.get_pos(),
                                self.enemies[0].get_pos())
@@ -91,6 +92,7 @@ class Game:
         pass
 
     def upgrade_closest_enemy(self, win) -> None:
+        '''Upgrades a single enemy closest to the player'''
         min_dist = PLAYER_SQUARE_VALUE
         idx = 0
         px, py = self.player.get_pos()
@@ -104,6 +106,7 @@ class Game:
         self.enemies[idx].upgrade(win)
 
     def update_difficulty(self, win) -> None:
+        '''Upgrades the game difficulty depending on the enemies present and the score'''
         if self.num_enemies < self.MAX_NUM_ENEMIES and randint(0, 100) < 50:
             self.num_enemies += 1
             self.enemies.append(
@@ -117,6 +120,7 @@ class Game:
             self.upgrade_closest_enemy(win)
 
     def show_score(self, win) -> None:
+        '''Shows the current score on the window'''
         # to fix text overlap when updated
         self.board.draw_single_square(win, 0, 2, GREY)
         pygame.display.update()
