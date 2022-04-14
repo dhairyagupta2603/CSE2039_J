@@ -23,27 +23,27 @@ The Player character is charcaterized by a Blue circle which has a 8-direction m
 	<li>Z - moves the player in Lower-Left direction</li>
 </ul>
 </p>
-<!-- Player image here with direction arrows if possible>
+<!-- Player image here with direction arrows if possible -->
 
 ### Enemies
 <p>
 **YELLOW ENEMY**<br>
 These enemies can only move in the Top-Down-Left-Right directions one tile at a time on the board and are fairly easy to avoid if there is only one but the player can be easily trapped if multiple of these are on the board.
 </p>
-<!-- Yellow enemy image here with direction arrrows if possible>
+<!-- Yellow enemy image here with direction arrrows if possible -->
 
 <p>
 **VIOLET ENEMY**<br>
 These enemies can only move in the diagonal directions one tile at a time on the board and are also fairly easy to avoid. Due to how they traverse, one Violet enemy can only travel to half of the board and depending on the spawn have a chance of getting stuck until upgraded. Even multiple of these are not much oof a threat to the player.
 </p>
-<!-- Violet enemy image here with direction arraows if possible>
+<!-- Violet enemy image here with direction arraows if possible -->
 
 
 <p>
 **RED ENEMY**<br>
 These are the bosses of this game and even one is a major threat to the player as it can follow the player anyware and will almost always be only one step behind, ready to trap the player with one miss-step. Using the walls to your advantage is the only way to evade them. At max only 2 of these can be on the board at the same time but they are a force to be reconed with.
 </p>
-<!-- Red enemy image here with direction arraows if possible>
+<!-- Red enemy image here with direction arraows if possible -->
 
 ### Enemy AI in action
 <p>
