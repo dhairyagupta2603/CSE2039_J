@@ -1,8 +1,7 @@
 import firebasescore
-from sympy import false
-import constants
+#from sympy import false
 import pygame,sys
-from constants import BLACK, WHITE, WIN, RED, BLUE, GREEN, PINK
+from objects.constants import BLACK, WHITE, WIN, RED, BLUE, PINK
 
 input_text = 'Enter your username:'
 starttext = 'START'
@@ -13,15 +12,15 @@ title = ' P A C - M O U S E'
 pygame.init()
 clock = pygame.time.Clock()
 pygame.display.set_caption("Main-Menu")
-win = constants.WIN
-font = constants.FONT
-titlefont = constants.TITLE_FONT
+win = WIN
+font = pygame.font.Font('freesansbold.ttf', 20)
+titlefont = pygame.font.Font('C:\Windows\Fonts\courbd.ttf', 25)
 usertext = ''
 input_rect = pygame.Rect(300,200,200,50)
 start_rect = pygame.Rect(200,300,200,50)
 quit_rect = pygame.Rect(200,400,200,50)
 
-active = false
+active = False
 
 while(True):
     for event in pygame.event.get():
@@ -34,11 +33,11 @@ while(True):
                 active = True
             elif start_rect.collidepoint(event.pos):
                 #start the game
-                constants.username = usertext
-                print(constants.username)
+                username = usertext
+                print(username)
             elif quit_rect.collidepoint(event.pos):
-                firebasescore.senddata(usertext, 30)
-                pygame.quit()
+                firebasescore.senddata(usertext, 30) #change the fixed value 
+                pygame.quit()                         #transfer all functions of this quit to gameover quit
                 sys.exit()
             else:
                 active = False
