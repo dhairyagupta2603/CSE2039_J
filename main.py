@@ -5,7 +5,7 @@ import firebasescore
 from game import Game
 
 
-def game_play(win, clock, fps: int) -> int:
+def game_play(win, clock, fps: int, user_name) -> int:
     game = Game(win)
     run = True
     while run:
@@ -28,7 +28,7 @@ def game_play(win, clock, fps: int) -> int:
                     run = False
                     break
                 game.player_turn = True
-    # firebasescore.send_data('Dhairya', game.score)
+    firebasescore.send_data(user_name, game.score)
     return game.score
 
 
@@ -122,7 +122,7 @@ def main_menu(win, clock, fps: int, is_playing) -> bool:
             if event.type == pygame.KEYDOWN:
                 if active == True:
                     if len(usertext) <= 20:  # limit no of characters
-                        if event.type == pygame.K_BACKSPACE:
+                        if event.type == pygame.K_BACKSPACE:  # TODO: backspace not woking
                             usertext = usertext[0:-1]
                         elif event.type == pygame.K_KP_ENTER:
                             # start the game
@@ -149,8 +149,8 @@ def main_menu(win, clock, fps: int, is_playing) -> bool:
         win.blit(text_surface, (quit_rect.x + 24, quit_rect.y + 15))
         input_rect.w = max(250, text_surface.get_width()+50)
         pygame.display.update()
-        
-    return is_playing
+
+    return is_playing, usertext
 
 
 def main():
@@ -158,18 +158,17 @@ def main():
     Clock = pygame.time.Clock()
     pygame.display.set_caption(GAME_NAME)
 
-    is_playing = main_menu(WIN, Clock, FPS, True)
+    is_playing, user_name = main_menu(WIN, Clock, FPS, True)
     is_same_player = True
     while is_playing:
         if is_same_player == True:
-            score = game_play(WIN, Clock, FPS)
+            score = game_play(WIN, Clock, FPS, user_name)
             is_same_player = game_over(
                 WIN, Clock, FPS, score, is_same_player, is_playing)
         else:
             is_same_player = True
-            is_playing = main_menu(WIN, Clock, FPS, is_playing)
+            is_playing, user_name = main_menu(WIN, Clock, FPS, is_playing)
 
-    # score = game_play(WIN, Clock, FPS)
     pygame.quit()
 
 
