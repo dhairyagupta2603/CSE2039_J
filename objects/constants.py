@@ -1,13 +1,18 @@
 import pygame
+pygame.init()
+
 
 # firebase user details
 gamescore = 10
 username = ''
+
+
 # display window
 HEIGHT, WIDTH = 682, 682
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+CENTER_H, CENTER_W = HEIGHT//2, WIDTH//2
 ROWS, COLS = 17, 17
 SQUARE_SIZE = WIDTH // COLS
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # rgb
 PINK = (255, 84, 189)
@@ -19,13 +24,8 @@ YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
+LIGHT_BLUE = (0, 128, 255)
 VIOLET = (127, 0, 255)
-
-# display text
-pygame.font.init()
-FONT = pygame.font.Font('freesansbold.ttf', 20)
-TITLE_FONT = pygame.font.Font('C:\Windows\Fonts\courbd.ttf', 25)
-SCORE_COORD = (20, 10)
 
 # piece objects
 PLAYER = {
@@ -69,3 +69,4 @@ WALL_SQUARES = [
     (13, 2), (13, 14),
     (14, 3), (14, 5), (14, 6), (14, 10), (14, 11), (14, 13)
 ]
+

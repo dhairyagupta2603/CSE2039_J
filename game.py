@@ -7,7 +7,7 @@ from objects.player import Player
 from objects.enemies import Enemy
 from objects.prize import Prize
 #from objects import firebasescore
-from objects.constants import BLACK, GREY, BLUE, ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES, WHITE, FONT, SCORE_COORD
+from objects.constants import GREY, BLUE, ROWS, COLS, PLAYER_SQUARE_VALUE, WALL_SQUARES
 
 
 class Game:
@@ -43,8 +43,7 @@ class Game:
         pygame.display.update()
         self.player_turn = True
         self.player_killed = False
-        self.MAX_NUM_ENEMIES = 1
-        self.high_score = 0
+        self.MAX_NUM_ENEMIES = 2
 
     def move_enemies(self, win):
         for i, enemy in enumerate(self.enemies):
@@ -84,7 +83,7 @@ class Game:
             self.score += 1
             self.show_score(win)
             pygame.display.update()
-            # self.update_difficulty(win)
+            self.update_difficulty(win)
         print(self.score)
 
     def __remove_enemies(self, win) -> None:
@@ -117,12 +116,10 @@ class Game:
         elif self.num_enemies == self.MAX_NUM_ENEMIES:
             self.upgrade_closest_enemy(win)
 
-    def is_player_dead(self) -> bool:
-        # TODO: define player kill condition
-        pass
-        
     def show_score(self, win) -> None:
-        self.board.draw_single_square(win, 0, 2, GREY) # to fix text overlap when updated
+        # to fix text overlap when updated
+        self.board.draw_single_square(win, 0, 2, GREY)
         pygame.display.update()
-        score_disp = FONT.render(f'Score: {self.score}', True, BLUE)
-        win.blit(score_disp, SCORE_COORD)
+        score_disp = pygame.font.Font('freesansbold.ttf', 20).render(
+            f'Score: {self.score}', True, BLUE)
+        win.blit(score_disp, (20, 10))
