@@ -13,6 +13,7 @@ CENTER_H, CENTER_W = HEIGHT//2, WIDTH//2
 ROWS, COLS = 17, 17
 SQUARE_SIZE = WIDTH // COLS
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+GAME_NAME = 'Kingdom of Circles'
 
 # rgb
 PINK = (255, 84, 189)
@@ -22,6 +23,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
+BOTTLE_GREEN = (50, 145, 113)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
 LIGHT_BLUE = (0, 128, 255)
