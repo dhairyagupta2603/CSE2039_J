@@ -3,6 +3,7 @@ from math import sqrt
 from random import randint
 from .constants import RED, VIOLET, YELLOW, ROWS, COLS, ENEMY_DIAG, ENEMY_4_DIR, ENEMY_8_DIR, RHIGH, CHIGH, WALL_SQUARES
 from .piece import Piece
+import pygame
 
 
 class Enemy(Piece):
@@ -10,6 +11,7 @@ class Enemy(Piece):
         super().__init__(row, col)
         if randint(0, 1) == 1:
             self.color = YELLOW
+            self.texture = pygame.image.load(r"textures\enemy1.png")
             self.type = ENEMY_4_DIR['name']
             self.seek_range = ENEMY_4_DIR['seek']
         else:

@@ -1,25 +1,33 @@
 import pygame
+pygame.init()
+
+
+# firebase user details
+gamescore = 10
+username = ''
+
 
 # display window
 HEIGHT, WIDTH = 682, 682
+CENTER_H, CENTER_W = HEIGHT//2, WIDTH//2
 ROWS, COLS = 17, 17
 SQUARE_SIZE = WIDTH // COLS
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+GAME_NAME = 'Kingdom of Circles'
 
 # rgb
+PINK = (255, 84, 189)
 GREY = (127, 127, 127)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
+BOTTLE_GREEN = (50, 145, 113)
 DARKER_GREEN = (0, 225, 0)
 BLUE = (0, 0, 255)
+LIGHT_BLUE = (0, 128, 255)
 VIOLET = (127, 0, 255)
-
-# display text
-pygame.font.init()
-FONT = pygame.font.Font('freesansbold.ttf', 20)
-SCORE_COORD = (20, 10)
 
 # piece objects
 PLAYER = {
@@ -63,3 +71,4 @@ WALL_SQUARES = [
     (13, 2), (13, 14),
     (14, 3), (14, 5), (14, 6), (14, 10), (14, 11), (14, 13)
 ]
+
